@@ -1,0 +1,4 @@
+<RCC>
+    <qresource prefix="ffmpeg_player">
+    </qresource>
+</RCC>
