@@ -149,7 +149,7 @@ static int decode_write_frame(const char *outfilename, AVCodecContext *avctx,
 	got_frame = avcodec_receive_frame(avctx, frame);
 
 	// 解码成功
-	if (got_frame) {
+	if (!got_frame) {
 		printf("Saving %sframe %3d\n", last ? "last " : "", *frame_count);
 		fflush(stdout);
 
@@ -167,6 +167,7 @@ static int decode_write_frame(const char *outfilename, AVCodecContext *avctx,
 
 int main(int argc, char **argv)
 {
+	av_register_all();
 	int ret;
 
 	//FILE *f;
