@@ -94,7 +94,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>../lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(solutiondir)lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>avcodec.lib;avformat.lib;avutil.lib;avdevice.lib;avfilter.lib;postproc.lib;swresample.lib;swscale.lib;SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -160,6 +160,7 @@
   <ItemGroup>
     <ClInclude Include="ffmpeg_rtsp.h" />
     <ClInclude Include="ffmpeg_rtsp2.h" />
+    <ClInclude Include="simplest_ffmpeg_video_2_image.h" />
     <ClInclude Include="simplest_ffmpeg_video_filter.h" />
     <ClInclude Include="simplest_ffmpeg_video_filter2.h" />
     <ClInclude Include="stdafx.h" />

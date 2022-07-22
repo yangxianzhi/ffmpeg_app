@@ -36,6 +36,9 @@
     <ClInclude Include="simplest_ffmpeg_video_filter2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="simplest_ffmpeg_video_2_image.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
