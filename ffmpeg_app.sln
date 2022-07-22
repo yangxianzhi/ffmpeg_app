@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1831
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ffmpeg_rtsp", "ffmpeg_rtsp\ffmpeg_rtsp.vcxproj", "{AB991D5F-C88D-4BE0-898C-5328D1065122}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ffmpeg_player", "ffmpeg_player\ffmpeg_player.vcxproj", "{B12702AD-ABFB-343A-A199-8E24837244A3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ffmpeg_video2picture", "ffmpeg_video2picture\ffmpeg_video2picture.vcxproj", "{7CC9A437-BFCB-4077-96D4-C1E18C131EEC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,8 +31,19 @@ Global
 		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|x64.ActiveCfg = Release|Win32
 		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|x86.ActiveCfg = Release|Win32
 		{B12702AD-ABFB-343A-A199-8E24837244A3}.Release|x86.Build.0 = Release|Win32
+		{7CC9A437-BFCB-4077-96D4-C1E18C131EEC}.Debug|x64.ActiveCfg = Debug|x64
+		{7CC9A437-BFCB-4077-96D4-C1E18C131EEC}.Debug|x64.Build.0 = Debug|x64
+		{7CC9A437-BFCB-4077-96D4-C1E18C131EEC}.Debug|x86.ActiveCfg = Debug|Win32
+		{7CC9A437-BFCB-4077-96D4-C1E18C131EEC}.Debug|x86.Build.0 = Debug|Win32
+		{7CC9A437-BFCB-4077-96D4-C1E18C131EEC}.Release|x64.ActiveCfg = Release|x64
+		{7CC9A437-BFCB-4077-96D4-C1E18C131EEC}.Release|x64.Build.0 = Release|x64
+		{7CC9A437-BFCB-4077-96D4-C1E18C131EEC}.Release|x86.ActiveCfg = Release|Win32
+		{7CC9A437-BFCB-4077-96D4-C1E18C131EEC}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BD0E0754-9D2B-469F-97A5-18C0449DE7B2}
 	EndGlobalSection
 EndGlobal
