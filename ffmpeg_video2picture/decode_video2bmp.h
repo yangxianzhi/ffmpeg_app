@@ -405,23 +405,21 @@ static void decode(AVCodecContext *dec_ctx, AVFrame *frame, AVPacket *pkt, 	cons
 		printf("saving frame %3d\n", dec_ctx->frame_number);
 		fflush(stdout);
 
-		/* the picture is allocated by the decoder. no need to
-		   free it */
+		/* the picture is allocated by the decoder. no need to free it */
 // 		snprintf(buf, sizeof(buf), "%s-%d", filename, dec_ctx->frame_number);
-// 		pgm_save(frame->data[0], frame->linesize[0],
-// 			frame->width, frame->height, buf);
+// 		pgm_save(frame->data[0], frame->linesize[0], frame->width, frame->height, buf);
 
-// 		{
-// 			memset(buf, 0, sizeof(buf));
-// 			snprintf(buf, sizeof(buf), "%s-%d.jpeg", filename, dec_ctx->frame_number);
-// 			avframe_to_jpeg(frame, buf);
-// 		}
+		{
+			memset(buf, 0, sizeof(buf));
+			snprintf(buf, sizeof(buf), "%s-%d.jpeg", filename, dec_ctx->frame_number);
+			avframe_to_jpeg(frame, buf);
+		}
 
-// 		{
-// 			memset(buf, 0, sizeof(buf));
-// 			snprintf(buf, sizeof(buf), "%s-%d.png", filename, dec_ctx->frame_number);
-// 			avframe_to_png(frame, buf);
-// 		}
+		{
+			memset(buf, 0, sizeof(buf));
+			snprintf(buf, sizeof(buf), "%s-%d.png", filename, dec_ctx->frame_number);
+			avframe_to_png(frame, buf);
+		}
 
 		{
 			memset(buf, 0, sizeof(buf));
@@ -429,16 +427,16 @@ static void decode(AVCodecContext *dec_ctx, AVFrame *frame, AVPacket *pkt, 	cons
 			avframe_to_bmp(frame, buf);
 		}
 
-// 		{// 保持到bmp
-// 			AVFrame * pFrameRGB = FrameToRGB(frame);
-// 			pFrameRGB->width = frame->width;
-// 			pFrameRGB->height = frame->height;
-// 			memset(buf, 0, sizeof(buf));
-// 			snprintf(buf, sizeof(buf), "%s-%d.bmp", filename, dec_ctx->frame_number);
-// 			SaveAsBMP(pFrameRGB, frame->width, frame->height, buf, 24);
-// 			av_freep(&pFrameRGB[0]);
-// 			av_free(pFrameRGB);
-// 		}
+		{// 保持到bmp
+			AVFrame * pFrameRGB = FrameToRGB(frame);
+			pFrameRGB->width = frame->width;
+			pFrameRGB->height = frame->height;
+			memset(buf, 0, sizeof(buf));
+			snprintf(buf, sizeof(buf), "%s-%d.bmp", filename, dec_ctx->frame_number);
+			SaveAsBMP(pFrameRGB, frame->width, frame->height, buf, 24);
+			av_freep(&pFrameRGB[0]);
+			av_free(pFrameRGB);
+		}
 
 		dec_ctx->frame_number++;
 
@@ -481,9 +479,9 @@ int main(int argc, char **argv)
 	filename = argv[1];
 	outfilename = argv[2];
 
-	av_log_set_flags(AV_LOG_SKIP_REPEATED);
+	av_log_set_flags(AV_LOG_PRINT_LEVEL);
 	av_log_set_level(AV_LOG_TRACE);
-	av_log_set_callback(printlog);
+// 	av_log_set_callback(printlog);
 
 	pkt = av_packet_alloc();
 	if (!pkt)
