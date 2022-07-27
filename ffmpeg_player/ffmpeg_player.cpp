@@ -526,7 +526,7 @@ void ffmpeg_player::print_program_info(int flags, int level)
 {
 	const char *indent = flags & INDENT ? "  " : "";
 
-	av_log(NULL, level, "%s version " FFMPEG_VERSION, program_name);
+	//av_log(NULL, level, "%s version " LIBAVFORMAT_VERSION, program_name);
 	if (flags & SHOW_COPYRIGHT)
 		av_log(NULL, level, " Copyright (c) %d-%d the FFmpeg developers",
 			program_birth_year, CONFIG_THIS_YEAR);
@@ -1188,13 +1188,13 @@ int ffmpeg_player::configure_video_filters(AVFilterGraph *graph, VideoState *is,
 
 
 	/*根据name 获取对应的滤波器*/
-	AVFilter *buffersrc = avfilter_get_by_name("buffer");
+	const AVFilter *buffersrc = avfilter_get_by_name("buffer");
 	ret = avfilter_graph_create_filter(&filt_src, buffersrc, "ffmpeg_player_buffer", buffersrc_args, NULL, graph);
 	if (ret < 0)
 		goto fail;
 
 	/*根据name 获取对应的滤波器*/
-	AVFilter *buffersink = avfilter_get_by_name("buffersink");
+	const AVFilter *buffersink = avfilter_get_by_name("buffersink");
 	ret = avfilter_graph_create_filter(&filt_out, buffersink, "ffmpeg_player_buffersink", NULL, NULL, graph);
 	if (ret < 0)
 		goto fail;
@@ -1284,7 +1284,7 @@ int ffmpeg_player::configure_audio_filters(VideoState *is, const char *afilters,
 
 
 	/*根据name 获取对应的滤波器*/
-	AVFilter *buffersrc = avfilter_get_by_name("abuffer");
+	const AVFilter *buffersrc = avfilter_get_by_name("abuffer");
 	ret = avfilter_graph_create_filter(&filt_asrc, buffersrc, "ffmpeg_player_abuffer",
 		asrc_args, NULL, is->agraph);
 	if (ret < 0)
@@ -1292,7 +1292,7 @@ int ffmpeg_player::configure_audio_filters(VideoState *is, const char *afilters,
 
 
 	/*根据name 获取对应的滤波器*/
-	AVFilter *buffersink = avfilter_get_by_name("abuffersink");
+	const AVFilter *buffersink = avfilter_get_by_name("abuffersink");
 	ret = avfilter_graph_create_filter(&filt_asink,	buffersink, "ffmpeg_player_abuffersink",
 		NULL, NULL, is->agraph);
 	if (ret < 0)

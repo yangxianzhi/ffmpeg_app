@@ -15,8 +15,25 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ffmpeg_video2picture.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ffmpeg_video2jpeg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="decode_video2bmp.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="decode_video2jpeg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="encode_video.c.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ffmpeg_video2bmp.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

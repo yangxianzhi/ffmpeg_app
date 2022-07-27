@@ -1,11 +1,12 @@
 ﻿// ffmpeg_video2picture.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
 //
 /*将视频转图片*/
-
+#pragma once
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
+#define __STDC_LIMIT_MACROS
 extern "C"
 {
 #include <libavformat/avformat.h>
@@ -20,7 +21,6 @@ extern "C"
 #define DWORD uint32_t
 #define LONG int32_t
 
-#pragma pack(2)
 // 位图文件头（bitmap-file header）包含了图像类型、图像大小、图像数据存放地址和两个保留未使用的字段
 typedef struct tagBITMAPFILEHEADER {
 	WORD  bfType;
@@ -64,7 +64,7 @@ void saveBMP(struct SwsContext *img_convert_ctx, AVFrame *frame, char *filename)
 
 	//pFrameRGB,是将RGB转换成YUV之后，存储YUV一帧图像用的。 out_buffer是YUV的存储空间。
 	//下面两个宽高，是图像的宽高（由于输出的宽高=输入的宽高，所以整个例子中只有一组宽高）。
-	av_image_fill_arrays(pFrameRGB->data, pFrameRGB->linesize, buffer, AV_PIX_FMT_BGR24, w, h, 0);
+	av_image_fill_arrays(pFrameRGB->data, pFrameRGB->linesize, buffer, AV_PIX_FMT_BGR24, w, h, 1);
 
 	/*
 	进行转换
@@ -73,23 +73,22 @@ void saveBMP(struct SwsContext *img_convert_ctx, AVFrame *frame, char *filename)
 	第4个参数是指第一列要处理的位置
 	第5个参数是source slice 的高度
 	*/
-	sws_scale(img_convert_ctx, frame->data, frame->linesize,
-		0, h, pFrameRGB->data, pFrameRGB->linesize);
+	sws_scale(img_convert_ctx, frame->data, frame->linesize, 0, h, pFrameRGB->data, pFrameRGB->linesize);
 
 	//2 构造 BITMAPINFOHEADER
 	BITMAPINFOHEADER header;
 	header.biSize = sizeof(BITMAPINFOHEADER);
 
-
+	int bpp = 24;
 	header.biWidth = w;
 	header.biHeight = h * (-1);
 	header.biBitCount = 24;
 	header.biCompression = 0;
-	header.biSizeImage = 0;
+	header.biSizeImage = (w*bpp + 31) / 32 * 4 * h;
 	header.biClrImportant = 0;
 	header.biClrUsed = 0;
-	header.biXPelsPerMeter = 0;
-	header.biYPelsPerMeter = 0;
+	header.biXPelsPerMeter = 100;
+	header.biYPelsPerMeter = 100;
 	header.biPlanes = 1;
 
 	//3 构造文件头
@@ -167,7 +166,6 @@ static int decode_write_frame(const char *outfilename, AVCodecContext *avctx,
 
 int main(int argc, char **argv)
 {
-	av_register_all();
 	int ret;
 
 	//FILE *f;
@@ -227,7 +225,8 @@ int main(int argc, char **argv)
 	st = fmt_ctx->streams[stream_index];
 
 	// 根据流中编码参数中的解码器ID查找解码器
-	codec = avcodec_find_decoder(st->codecpar->codec_id);
+	// codec = avcodec_find_decoder(st->codecpar->codec_id);
+	codec = avcodec_find_decoder(AV_CODEC_ID_H264);
 	if (!codec) {
 		fprintf(stderr, "Failed to find %s codec\n",
 			av_get_media_type_string(AVMEDIA_TYPE_VIDEO));
