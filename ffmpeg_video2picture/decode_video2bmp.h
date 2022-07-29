@@ -425,13 +425,13 @@ static void decode(AVCodecContext *dec_ctx, AVFrame *frame, AVPacket *pkt, 	cons
 // 			snprintf(buf, sizeof(buf), "%s-%d.png", filename, dec_ctx->frame_number);
 // 			avframe_to_png(frame, buf);
 // 		}
-// 
+ 
 // 		{
 // 			memset(buf, 0, sizeof(buf));
 // 			snprintf(buf, sizeof(buf), "%s-%d-avctx.bmp", filename, dec_ctx->frame_number);
 // 			avframe_to_bmp(frame, buf);
 // 		}
-// 
+ 
 // 		{// ±£³Öµ½bmp
 // 			AVFrame * pFrameRGB = FrameToRGB(frame);
 // 			pFrameRGB->width = frame->width;
@@ -498,7 +498,7 @@ int main(int argc, char **argv)
 	/* find the MPEG-1 video decoder */
 	//codec = avcodec_find_decoder(AV_CODEC_ID_MPEG1VIDEO);
 	/* find the H264 video decoder */
-	codec = avcodec_find_decoder(AV_CODEC_ID_H264);
+	codec = avcodec_find_decoder(AV_CODEC_ID_H265);
 	if (!codec) {
 		fprintf(stderr, "Codec not found\n");
 		exit(1);
