@@ -184,11 +184,16 @@ int avframe_to_jpeg(AVFrame *srcFrame, char *filename) {
 	while (ret >= 0) {
 		ret = avcodec_receive_packet(jpegAVCC, packet);
 		if (ret == AVERROR(EAGAIN) || ret == AVERROR_EOF)
-			break;
-		else if (ret < 0) {
-			fprintf(stderr, "Error during encoding\n");
+		{
+			fprintf(stderr, "1111111111111111-------- avcodec_receive_packet %d\n", ret);
 			break;
 		}
+		else if (ret < 0) {
+			fprintf(stderr, "2222222222222222-------- avcodec_receive_packet %d\n", ret);
+			break;
+		}
+
+		fprintf(stderr, "33333333333-------- avcodec_receive_packet OK. file write %s \n", filename);
 		fwrite(packet->data, 1, (size_t)packet->size, jpegFile);
 		av_packet_unref(packet);
 	}
@@ -415,32 +420,32 @@ static void decode(AVCodecContext *dec_ctx, AVFrame *frame, AVPacket *pkt, 	cons
 			avframe_to_jpeg(frame, buf);
 		}
 
-		{
-			memset(buf, 0, sizeof(buf));
-			snprintf(buf, sizeof(buf), "%s-%d.png", filename, dec_ctx->frame_number);
-			avframe_to_png(frame, buf);
-		}
+// 		{
+// 			memset(buf, 0, sizeof(buf));
+// 			snprintf(buf, sizeof(buf), "%s-%d.png", filename, dec_ctx->frame_number);
+// 			avframe_to_png(frame, buf);
+// 		}
+// 
+// 		{
+// 			memset(buf, 0, sizeof(buf));
+// 			snprintf(buf, sizeof(buf), "%s-%d-avctx.bmp", filename, dec_ctx->frame_number);
+// 			avframe_to_bmp(frame, buf);
+// 		}
+// 
+// 		{// 保持到bmp
+// 			AVFrame * pFrameRGB = FrameToRGB(frame);
+// 			pFrameRGB->width = frame->width;
+// 			pFrameRGB->height = frame->height;
+// 			memset(buf, 0, sizeof(buf));
+// 			snprintf(buf, sizeof(buf), "%s-%d.bmp", filename, dec_ctx->frame_number);
+// 			SaveAsBMP(pFrameRGB, frame->width, frame->height, buf, 24);
+// 			av_freep(&pFrameRGB[0]);
+// 			av_free(pFrameRGB);
+// 		}
 
-		{
-			memset(buf, 0, sizeof(buf));
-			snprintf(buf, sizeof(buf), "%s-%d-avctx.bmp", filename, dec_ctx->frame_number);
-			avframe_to_bmp(frame, buf);
-		}
+//		dec_ctx->frame_number++;
 
-		{// 保持到bmp
-			AVFrame * pFrameRGB = FrameToRGB(frame);
-			pFrameRGB->width = frame->width;
-			pFrameRGB->height = frame->height;
-			memset(buf, 0, sizeof(buf));
-			snprintf(buf, sizeof(buf), "%s-%d.bmp", filename, dec_ctx->frame_number);
-			SaveAsBMP(pFrameRGB, frame->width, frame->height, buf, 24);
-			av_freep(&pFrameRGB[0]);
-			av_free(pFrameRGB);
-		}
-
-		dec_ctx->frame_number++;
-
-		exit(1); //测试 转一张图片
+		//exit(1); //测试 转一张图片
 	}
 }
 
