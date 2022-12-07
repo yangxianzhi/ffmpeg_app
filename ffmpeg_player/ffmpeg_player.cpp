@@ -230,6 +230,8 @@ void ffmpeg_player::init(void* hwnd)
 	init_dynload();
 
 	/* register all codecs, demux and protocols */
+	/**
+	 * 过期的方法
 #if CONFIG_AVDEVICE
 	avdevice_register_all();
 #endif
@@ -237,6 +239,7 @@ void ffmpeg_player::init(void* hwnd)
 	avfilter_register_all();
 #endif
 	av_register_all();
+	 */
 	avformat_network_init();
 
 	init_opts();
@@ -251,10 +254,10 @@ void ffmpeg_player::init(void* hwnd)
 	//m_pParentHWND = hwnd;
 	init_sdl(hwnd);
 
-	if (av_lockmgr_register(lockmgr)) {
-		av_log(NULL, AV_LOG_FATAL, "Could not initialize lock manager!\n");
-		do_exit(NULL);
-	}
+// 	if (av_lockmgr_register(lockmgr)) {
+// 		av_log(NULL, AV_LOG_FATAL, "Could not initialize lock manager!\n");
+// 		do_exit(NULL);
+// 	}
 
 	av_init_packet(&flush_pkt);
 	flush_pkt.data = (uint8_t *)&flush_pkt;

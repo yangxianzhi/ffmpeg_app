@@ -342,7 +342,7 @@ static int get_format_from_sample_fmt(const char **fmt, enum AVSampleFormat samp
 
 int main(int argc, char **argv)
 {
-	av_register_all();
+	//av_register_all();
 	int ret = 0, got_frame;
 	int numBytes = 0;
 	uint8_t *buffer = NULL;

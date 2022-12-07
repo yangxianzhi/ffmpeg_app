@@ -10,7 +10,7 @@ extern "C"
 #include <intsafe.h>
 #include <stdint.h>  
 #include <inttypes.h>  
-#include <config.h>
+//#include <config.h>
 #include <libavcodec/avcodec.h> 
 #include <libavcodec/avfft.h>
 #include <libavformat/avformat.h> 
