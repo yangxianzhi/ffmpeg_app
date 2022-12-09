@@ -4,7 +4,7 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QLineEdit>
 
-#define  PLAYER_SIZE 4
+#define  PLAYER_SIZE 1
 
 testPlayer::testPlayer(QWidget *parent)
 	: QWidget(parent)
@@ -24,8 +24,7 @@ testPlayer::testPlayer(QWidget *parent)
 	vLayout->addLayout(gridLayout);
 
 	pUrlEdit = new QLineEdit(this);
-	pUrlEdit->setText("rtsp://47.104.83.137:10554/E529A17020011_1");
-	pUrlEdit->setText("rtsp://www.kfchain.com:554/E529A17010225_2");
+	pUrlEdit->setText("D:\\video4.mp4");
 
 	QPushButton* pStart = new QPushButton(this);
 	pStart->setText("start");
@@ -46,7 +45,7 @@ testPlayer::testPlayer(QWidget *parent)
 	hLayout1->setMargin(1);
 
 	pSubtitleEdit = new QLineEdit(this);
-	pSubtitleEdit->setText(QString::fromLocal8Bit("车辆精细化综合运管系统 "));
+	pSubtitleEdit->setText(QString::fromLocal8Bit("北京合力亿捷科技股份有限 "));
 
 	QPushButton* pSubtitle = new QPushButton(this);
 	pSubtitle->setText("subtitle");

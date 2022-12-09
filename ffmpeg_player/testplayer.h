@@ -1,7 +1,7 @@
 #ifndef TESTPLAYER_H
 #define TESTPLAYER_H
 
-#include <QWidget>
+#include <QtWidgets/QWidget>
 class player_widget;
 class QLineEdit;
 class testPlayer : public QWidget

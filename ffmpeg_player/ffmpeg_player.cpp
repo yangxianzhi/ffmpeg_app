@@ -2621,12 +2621,12 @@ int ffmpeg_player::read_thread(void *arg)
 	if (scan_all_pmts_set)
 		av_dict_set(&pffPlayer->format_opts, "scan_all_pmts", NULL, AV_DICT_MATCH_CASE);
 
-	if ((t = av_dict_get(pffPlayer->format_opts, "", NULL, AV_DICT_IGNORE_SUFFIX))) 
-	{
-		av_log(NULL, AV_LOG_ERROR, "Option %s not found.\n", t->key);
-		ret = AVERROR_OPTION_NOT_FOUND;
-		goto fail;
-	}
+// 	if ((t = av_dict_get(pffPlayer->format_opts, "", NULL, AV_DICT_IGNORE_SUFFIX))) 
+// 	{
+// 		av_log(NULL, AV_LOG_ERROR, "Option %s not found.\n", t->key);
+// 		ret = AVERROR_OPTION_NOT_FOUND;
+// 		goto fail;
+// 	}
 	is->ic = ic;
 
 	if (pffPlayer->genpts)
