@@ -118,9 +118,9 @@ static inline char *av_make_error_string(char *errbuf, size_t errbuf_size, int e
  * Convenience macro, the return value should be used only directly in
  * function arguments but never stand-alone.
  */
-char av_error[AV_ERROR_MAX_STRING_SIZE] = { 0 };
-#define av_err2str(errnum) \
-    av_make_error_string(av_error, AV_ERROR_MAX_STRING_SIZE, errnum)
+// char av_error[AV_ERROR_MAX_STRING_SIZE] = { 0 };
+// #define av_err2str(errnum) \
+//     av_make_error_string(av_error, AV_ERROR_MAX_STRING_SIZE, errnum)
 
 /**
  * @}

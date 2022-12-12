@@ -35,5 +35,8 @@
     <ClInclude Include="ffmpeg_video2bmp.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="filtering_video.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

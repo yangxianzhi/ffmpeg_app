@@ -299,7 +299,7 @@ private:
 	VideoState *stream_open(const char *filename, AVInputFormat *iformat);
 	void print_error(const char *filename, int err);
 	AVDictionary **setup_find_stream_info_opts(AVFormatContext *s, AVDictionary *codec_opts);
-	AVDictionary *filter_codec_opts(AVDictionary *opts, enum AVCodecID codec_id, AVFormatContext *s, AVStream *st, AVCodec *codec);
+	AVDictionary *filter_codec_opts(AVDictionary *opts, enum AVCodecID codec_id, AVFormatContext *s, AVStream *st, const AVCodec *codec);
 	int check_stream_specifier(AVFormatContext *s, AVStream *st, const char *spec);
 	int is_realtime(AVFormatContext *s);
 	void calculate_display_rect(SDL_Rect *rect,	int scr_xleft, int scr_ytop, int scr_width, int scr_height,

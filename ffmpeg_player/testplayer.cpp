@@ -4,7 +4,7 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QLineEdit>
 
-#define  PLAYER_SIZE 4
+#define  PLAYER_SIZE 1
 
 testPlayer::testPlayer(QWidget *parent)
 	: QWidget(parent)
@@ -24,7 +24,7 @@ testPlayer::testPlayer(QWidget *parent)
 	vLayout->addLayout(gridLayout);
 
 	pUrlEdit = new QLineEdit(this);
-	pUrlEdit->setText("D:\\×ÀÃæ±¸·Ý\\vxml-files\\240\\video4.mp4");
+	pUrlEdit->setText("D:\\video4old.mp4");
 
 	QPushButton* pStart = new QPushButton(this);
 	pStart->setText("start");

@@ -514,75 +514,75 @@ void ffmpeg_player::sigterm_handler(int sig)
 
 void ffmpeg_player::print_all_libs_info(int flags, int level)
 {
-	PRINT_LIB_INFO(avutil, AVUTIL, flags, level);
-	PRINT_LIB_INFO(avcodec, AVCODEC, flags, level);
-	PRINT_LIB_INFO(avformat, AVFORMAT, flags, level);
-	PRINT_LIB_INFO(avdevice, AVDEVICE, flags, level);
-	PRINT_LIB_INFO(avfilter, AVFILTER, flags, level);
-	//PRINT_LIB_INFO(avresample, AVRESAMPLE, flags, level);
-	PRINT_LIB_INFO(swscale, SWSCALE, flags, level);
-	PRINT_LIB_INFO(swresample, SWRESAMPLE, flags, level);
-	PRINT_LIB_INFO(postproc, POSTPROC, flags, level);
+// 	PRINT_LIB_INFO(avutil, AVUTIL, flags, level);
+// 	PRINT_LIB_INFO(avcodec, AVCODEC, flags, level);
+// 	PRINT_LIB_INFO(avformat, AVFORMAT, flags, level);
+// 	PRINT_LIB_INFO(avdevice, AVDEVICE, flags, level);
+// 	PRINT_LIB_INFO(avfilter, AVFILTER, flags, level);
+// 	//PRINT_LIB_INFO(avresample, AVRESAMPLE, flags, level);
+// 	PRINT_LIB_INFO(swscale, SWSCALE, flags, level);
+// 	PRINT_LIB_INFO(swresample, SWRESAMPLE, flags, level);
+// 	PRINT_LIB_INFO(postproc, POSTPROC, flags, level);
 }
 
 void ffmpeg_player::print_program_info(int flags, int level)
 {
-	const char *indent = flags & INDENT ? "  " : "";
-
-	//av_log(NULL, level, "%s version " LIBAVFORMAT_VERSION, program_name);
-	if (flags & SHOW_COPYRIGHT)
-		av_log(NULL, level, " Copyright (c) %d-%d the FFmpeg developers",
-			program_birth_year, CONFIG_THIS_YEAR);
-	av_log(NULL, level, "\n");
-	av_log(NULL, level, "%sbuilt with %s\n", indent, CC_IDENT);
-
-	av_log(NULL, level, "%sconfiguration: " FFMPEG_CONFIGURATION "\n", indent);
+// 	const char *indent = flags & INDENT ? "  " : "";
+// 
+// 	//av_log(NULL, level, "%s version " LIBAVFORMAT_VERSION, program_name);
+// 	if (flags & SHOW_COPYRIGHT)
+// 		av_log(NULL, level, " Copyright (c) %d-%d the FFmpeg developers",
+// 			program_birth_year, CONFIG_THIS_YEAR);
+// 	av_log(NULL, level, "\n");
+// 	av_log(NULL, level, "%sbuilt with %s\n", indent, CC_IDENT);
+// 
+// 	av_log(NULL, level, "%sconfiguration: " FFMPEG_CONFIGURATION "\n", indent);
 }
 
 void ffmpeg_player::print_buildconf(int flags, int level)
 {
-	const char *indent = flags & INDENT ? "  " : "";
-	char str[] = { FFMPEG_CONFIGURATION };
-	char *conflist, *remove_tilde, *splitconf;
-
-	// Change all the ' --' strings to '~--' so that
-	// they can be identified as tokens.
-	while ((conflist = strstr(str, " --")) != NULL) {
-		strncpy(conflist, "~--", 3);
-	}
-
-	// Compensate for the weirdness this would cause
-	// when passing 'pkg-config --static'.
-	while ((remove_tilde = strstr(str, "pkg-config~")) != NULL) {
-		strncpy(remove_tilde, "pkg-config ", 11);
-	}
-
-	splitconf = strtok(str, "~");
-	av_log(NULL, level, "\n%sconfiguration:\n", indent);
-	while (splitconf != NULL) {
-		av_log(NULL, level, "%s%s%s\n", indent, indent, splitconf);
-		splitconf = strtok(NULL, "~");
-	}
+// 	const char *indent = flags & INDENT ? "  " : "";
+// 	char str[] = { FFMPEG_CONFIGURATION };
+// 	char *conflist, *remove_tilde, *splitconf;
+// 
+// 	// Change all the ' --' strings to '~--' so that
+// 	// they can be identified as tokens.
+// 	while ((conflist = strstr(str, " --")) != NULL) {
+// 		strncpy(conflist, "~--", 3);
+// 	}
+// 
+// 	// Compensate for the weirdness this would cause
+// 	// when passing 'pkg-config --static'.
+// 	while ((remove_tilde = strstr(str, "pkg-config~")) != NULL) {
+// 		strncpy(remove_tilde, "pkg-config ", 11);
+// 	}
+// 
+// 	splitconf = strtok(str, "~");
+// 	av_log(NULL, level, "\n%sconfiguration:\n", indent);
+// 	while (splitconf != NULL) {
+// 		av_log(NULL, level, "%s%s%s\n", indent, indent, splitconf);
+// 		splitconf = strtok(NULL, "~");
+// 	}
 }
 
 int ffmpeg_player::lockmgr(void **mtx, enum AVLockOp op)
 {
-	switch (op) {
-	case AV_LOCK_CREATE:
-		*mtx = SDL_CreateMutex();
-		if (!*mtx) {
-			av_log(NULL, AV_LOG_FATAL, "SDL_CreateMutex(): %s\n", SDL_GetError());
-			return 1;
-		}
-		return 0;
-	case AV_LOCK_OBTAIN:
-		return !!SDL_LockMutex((SDL_mutex*)*mtx);
-	case AV_LOCK_RELEASE:
-		return !!SDL_UnlockMutex((SDL_mutex*)*mtx);
-	case AV_LOCK_DESTROY:
-		SDL_DestroyMutex((SDL_mutex*)*mtx);
-		return 0;
-	}
+// 	switch (op) {
+// 	case AV_LOCK_CREATE:
+// 		*mtx = SDL_CreateMutex();
+// 		if (!*mtx) {
+// 			av_log(NULL, AV_LOG_FATAL, "SDL_CreateMutex(): %s\n", SDL_GetError());
+// 			return 1;
+// 		}
+// 		return 0;
+// 	case AV_LOCK_OBTAIN:
+// 		return !!SDL_LockMutex((SDL_mutex*)*mtx);
+// 	case AV_LOCK_RELEASE:
+// 		return !!SDL_UnlockMutex((SDL_mutex*)*mtx);
+// 	case AV_LOCK_DESTROY:
+// 		SDL_DestroyMutex((SDL_mutex*)*mtx);
+// 		return 0;
+// 	}
 	return 1;
 }
 
@@ -595,7 +595,7 @@ void ffmpeg_player::do_exit(VideoState *is)
 		SDL_DestroyRenderer(renderer);
 	if (window)
 		SDL_DestroyWindow(window);
-	av_lockmgr_register(NULL);
+	//av_lockmgr_register(NULL);
 	uninit_opts();
 #if CONFIG_AVFILTER
 	av_freep(&vfilters_list);
@@ -959,7 +959,7 @@ AVDictionary **ffmpeg_player::setup_find_stream_info_opts(AVFormatContext *s, AV
 	return opts;
 }
 
-AVDictionary *ffmpeg_player::filter_codec_opts(AVDictionary *opts, enum AVCodecID codec_id, AVFormatContext *s, AVStream *st, AVCodec *codec)
+AVDictionary *ffmpeg_player::filter_codec_opts(AVDictionary *opts, enum AVCodecID codec_id, AVFormatContext *s, AVStream *st, const AVCodec *codec)
 {
 	AVDictionary    *ret = NULL;
 	AVDictionaryEntry *t = NULL;
@@ -969,8 +969,7 @@ AVDictionary *ffmpeg_player::filter_codec_opts(AVDictionary *opts, enum AVCodecI
 	const AVClass    *cc = avcodec_get_class();
 
 	if (!codec)
-		codec = s->oformat ? avcodec_find_encoder(codec_id)
-		: avcodec_find_decoder(codec_id);
+		codec = s->oformat ? avcodec_find_encoder(codec_id)	: avcodec_find_decoder(codec_id);
 
 	switch (st->codecpar->codec_type) {
 	case AVMEDIA_TYPE_VIDEO:
@@ -988,6 +987,7 @@ AVDictionary *ffmpeg_player::filter_codec_opts(AVDictionary *opts, enum AVCodecI
 	}
 
 	while (t = av_dict_get(opts, "", t, AV_DICT_IGNORE_SUFFIX)) {
+		const AVClass *priv_class;
 		char *p = strchr(t->key, ':');
 
 		/* check stream specification in opt name */
@@ -1004,8 +1004,8 @@ AVDictionary *ffmpeg_player::filter_codec_opts(AVDictionary *opts, enum AVCodecI
 
 		if (av_opt_find(&cc, t->key, NULL, flags, AV_OPT_SEARCH_FAKE_OBJ) ||
 			!codec ||
-			(codec->priv_class &&
-				av_opt_find(&codec->priv_class, t->key, NULL, flags,
+			((priv_class = codec->priv_class) &&
+				av_opt_find(&priv_class, t->key, NULL, flags,
 					AV_OPT_SEARCH_FAKE_OBJ)))
 			av_dict_set(&ret, t->key, t->value, 0);
 		else if (t->key[0] == prefix &&
@@ -1035,8 +1035,8 @@ int ffmpeg_player::is_realtime(AVFormatContext *s)
 		)
 		return 1;
 
-	if (s->pb && (!strncmp(s->filename, "rtp:", 4)
-		|| !strncmp(s->filename, "udp:", 4)
+	if (s->pb && (!strncmp(s->url, "rtp:", 4)
+		|| !strncmp(s->url, "udp:", 4)
 		)
 		)
 		return 1;
@@ -1822,7 +1822,7 @@ int ffmpeg_player::decoder_decode_frame(Decoder *d, AVFrame *frame, AVSubtitle *
 						AVRational tb;
 						tb.num = 1, tb.den = frame->sample_rate;
 						if (frame->pts != AV_NOPTS_VALUE)
-							frame->pts = av_rescale_q(frame->pts, av_codec_get_pkt_timebase(d->avctx), tb);
+							frame->pts = av_rescale_q(frame->pts, d->avctx->pkt_timebase, tb);
 						else if (d->next_pts != AV_NOPTS_VALUE)
 							frame->pts = av_rescale_q(d->next_pts, d->next_pts_tb, tb);
 						if (frame->pts != AV_NOPTS_VALUE) 
@@ -2290,10 +2290,10 @@ int ffmpeg_player::stream_component_open(ffmpeg_player *pPlayer, int stream_inde
 	VideoState *is = pPlayer->m_pVideoState;
 	AVFormatContext *ic = is->ic;
 	AVCodecContext *avctx;
-	AVCodec *codec;
+	const AVCodec *codec;
 	const char *forced_codec_name = NULL;
 	AVDictionary *opts = NULL;
-	AVDictionaryEntry *t = NULL;
+	const AVDictionaryEntry *t = NULL;
 	int sample_rate, nb_channels;
 	int64_t channel_layout;
 	int ret = 0;
@@ -2309,7 +2309,8 @@ int ffmpeg_player::stream_component_open(ffmpeg_player *pPlayer, int stream_inde
 	ret = avcodec_parameters_to_context(avctx, ic->streams[stream_index]->codecpar);
 	if (ret < 0)
 		goto fail;
-	av_codec_set_pkt_timebase(avctx, ic->streams[stream_index]->time_base);
+	avctx->pkt_timebase = ic->streams[stream_index]->time_base;
+	//av_codec_set_pkt_timebase(avctx, ic->streams[stream_index]->time_base);
 
 	codec = avcodec_find_decoder(avctx->codec_id);
 
@@ -2339,12 +2340,13 @@ int ffmpeg_player::stream_component_open(ffmpeg_player *pPlayer, int stream_inde
 	}
 
 	avctx->codec_id = codec->id;
-	if (stream_lowres > av_codec_get_max_lowres(codec)) {
+	if (stream_lowres > codec->max_lowres) {
 		av_log(avctx, AV_LOG_WARNING, "The maximum value for lowres supported by the decoder is %d\n",
-			av_codec_get_max_lowres(codec));
-		stream_lowres = av_codec_get_max_lowres(codec);
+			codec->max_lowres);
+		stream_lowres = codec->max_lowres;
 	}
-	av_codec_set_lowres(avctx, stream_lowres);
+	avctx->lowres = stream_lowres;
+	//av_codec_set_lowres(avctx, stream_lowres);
 
 #if FF_API_EMU_EDGE
 	if (stream_lowres) avctx->flags |= CODEC_FLAG_EMU_EDGE;
@@ -2366,12 +2368,13 @@ int ffmpeg_player::stream_component_open(ffmpeg_player *pPlayer, int stream_inde
 	if ((ret = avcodec_open2(avctx, codec, &opts)) < 0) {
 		goto fail;
 	}
-	if ((t = av_dict_get(opts, "", NULL, AV_DICT_IGNORE_SUFFIX))) 
-	{
-		av_log(NULL, AV_LOG_ERROR, "Option %s not found.\n", t->key);
-		ret = AVERROR_OPTION_NOT_FOUND;
-		goto fail;
-	}
+
+// 	if ((t = av_dict_get(opts, "", NULL, AV_DICT_IGNORE_SUFFIX))) 
+// 	{
+// 		av_log(NULL, AV_LOG_ERROR, "Option %s not found.\n", t->key);
+// 		ret = AVERROR_OPTION_NOT_FOUND;
+// 		goto fail;
+// 	}
 
 	is->eof = 0;
 	ic->streams[stream_index]->discard = AVDISCARD_DEFAULT;
@@ -2624,12 +2627,12 @@ int ffmpeg_player::read_thread(void *arg)
 	if (scan_all_pmts_set)
 		av_dict_set(&pffPlayer->format_opts, "scan_all_pmts", NULL, AV_DICT_MATCH_CASE);
 
-	if ((t = av_dict_get(pffPlayer->format_opts, "", NULL, AV_DICT_IGNORE_SUFFIX))) 
-	{
-		av_log(NULL, AV_LOG_ERROR, "Option %s not found.\n", t->key);
-		ret = AVERROR_OPTION_NOT_FOUND;
-		goto fail;
-	}
+// 	if ((t = av_dict_get(pffPlayer->format_opts, "", NULL, AV_DICT_IGNORE_SUFFIX))) 
+// 	{
+// 		av_log(NULL, AV_LOG_ERROR, "Option %s not found.\n", t->key);
+// 		ret = AVERROR_OPTION_NOT_FOUND;
+// 		goto fail;
+// 	}
 	is->ic = ic;
 
 	if (pffPlayer->genpts)
@@ -2800,7 +2803,7 @@ int ffmpeg_player::read_thread(void *arg)
 			ret = avformat_seek_file(is->ic, -1, seek_min, seek_target, seek_max, is->seek_flags);
 			if (ret < 0) 
 			{
-				av_log(NULL, AV_LOG_ERROR, "%s: error while seeking\n", is->ic->filename);
+				av_log(NULL, AV_LOG_ERROR, "%s: error while seeking\n", is->ic->url);
 			}
 			else 
 			{
